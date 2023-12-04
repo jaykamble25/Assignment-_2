@@ -1,0 +1,89 @@
+<h3>Click to get Students Details </h3>
+<button (click)="showStudents()">Show Students</button>
+<div *ngIf="showStudentClicked">
+    <h4>Student list is:</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    <button (click)="sortByRollNumber()">Roll Number</button>
+                </th>
+                <th>
+                    <button (click)="sortByName()">Name</button>
+                </th>
+                <th>
+                    <button (click)="sortByPercentage()">Percentage</button>
+                </th>
+                <th>
+                    <button (click)="sortByNumberOfAttempts()">Number of Attempts</button>
+                </th>
+                <th>
+                    <button (click)="sortBySubjects()">Subjects</button>
+                </th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr *ngFor="let student of students">
+                <td>{{student.rollNo}}</td>
+                <td>{{student.name}}</td>
+                <td>{{student.percentage}}</td>
+                <td>{{student.numberOfAttempts}}</td>
+                <td>
+                    <ul>
+                        <li *ngFor="let subject of student.subjects">
+                            {{subject}}
+                        </li>
+                    </ul>
+                </td>
+                <td><button class="btnDelete" (click)="deleteStudent(student.rollNo)">Delete</button></td>
+                <td><button (click)="editStudent(student)">Edit</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <span [class]="colorClass">{{message}}</span>
+</div>
+
+<br>
+<br>
+<br>
+
+<button (click)="showAddStudent()">Add Student</button>
+<div *ngIf="addStudentDiv">
+    <div>Add Student Form</div>
+    <form>
+        <input type="text" placeholder="Roll Number" name="rollNo" [(ngModel)]='rollNo' />
+        <br>
+        <input type="text" placeholder="Name" name="name" [(ngModel)]='studentName' />
+        <br>
+        <input type="text" placeholder="Percentage" name="percentage" [(ngModel)]='percentage' />
+        <br>
+        <input type="text" placeholder="Number of Attempts" name="numberOfAttempts" [(ngModel)]='numberOfAttempts' />
+        <br>
+        <input type="text" placeholder="Subjects" name="subjects" [(ngModel)]='subjects' />
+        <br>
+        <button type="submit" (click)="addStudents()">Add</button>
+    </form>
+</div>
+
+<br>
+<br>
+<br>
+
+<div *ngIf="updateStudentDiv">
+    <div>Update Student Form</div>
+    <form>
+        <input type="text" placeholder="Roll Number" name="rollNo" [(ngModel)]='rollNo' />
+        <br>
+        <input type="text" placeholder="Name" name="name" [(ngModel)]='studentName' />
+        <br>
+        <input type="text" placeholder="Percentage" name="percentage" [(ngModel)]='percentage' />
+        <br>
+        <input type="text" placeholder="Number of Attempts" name="numberOfAttempts" [(ngModel)]='numberOfAttempts' />
+        <br>
+        <input type="text" placeholder="Subjects" name="subjects" [(ngModel)]='subjects' />
+        <br>
+        <button type="submit" (click)="updateStudent()">Update</button>
+    </form>
+</div>
